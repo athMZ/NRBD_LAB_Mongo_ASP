@@ -1,0 +1,66 @@
+﻿@model NRBD_LAB_Mongo_ASP.MusicAlbumList
+@{
+	ViewData["Title"] = "Music Albums";
+}
+
+<h2>Music Albums</h2>
+
+<div class="row mt-4 mb-4">
+	<div class="col-3">
+		<a class="btn btn-outline-primary" asp-action="Create" asp-controller="Home">Add new Album</a>
+	</div>
+</div>
+
+<div class="row mb-4 mt-4">
+	@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+	{
+		<div class="row mb-4 mt-4">
+			<div class="col">
+				<label for="filterTitle" class="form-label">Title:</label>
+				<input class="form-control" type="text" id="filterTitle" name="Filter.AlbumTitle" value="@Model.Filter.AlbumTitle" />
+			</div>
+			<div class="col">
+				<label for="filterYear" class="form-label">Year:</label>
+				<input class="form-control" type="text" id="filterYear" name="Filter.Year" value="@Model.Filter.Year" />
+			</div>
+			<div class="col d-flex align-content-center pt-4">
+				<button type="submit" class="btn btn-info">Filter</button>
+			</div>
+		</div>
+	}
+</div>
+
+<hr />
+
+<div class="row">
+	<table class="table">
+		<tr>
+			<th>Title</th>
+			<th>Year</th>
+			<th>Album Cover</th>
+			<th>Actions</th>
+		</tr>
+		@foreach (var album in Model.MusicAlbums)
+		{
+			<tr>
+				<td>@Html.DisplayFor(x => album.Title)</td>
+				<td>@Html.DisplayFor(x => album.Year)</td>
+
+				@if (album.Image != null)
+				{
+					<td>
+						<img src="data:image/jpeg;base64, @album.Image" style="max-width: 252px; height: auto;" />
+					</td>
+				}
+				else
+				{
+					<td>No Image</td>
+				}
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = album._id })
+					@Html.ActionLink("Delete", "Delete", new { id = album._id })
+				</td>
+			</tr>
+		}
+	</table>
+</div>

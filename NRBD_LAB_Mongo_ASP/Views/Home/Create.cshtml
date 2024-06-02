@@ -1,0 +1,39 @@
+﻿@model NRBD_LAB_Mongo_ASP.Models.MusicAlbumModel
+@{
+	ViewData["Title"] = "Add new Album";
+}
+
+<h2>Add new Album</h2>
+
+<div class="row">
+	<div class="col-md-6 ">
+		<form asp-action="Create" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label asp-for="Title" class="control-label"></label>
+				<input asp-for="Title" class="form-control" />
+				<span asp-validation-for="Title" class="text-danger"></span>
+			</div>
+
+			<div class="form-group mt-3">
+				<label asp-for="Year" class="control-label"></label>
+				<input asp-for="Year" class="form-control" />
+				<span asp-validation-for="Year" class="text-danger"></span>
+			</div>
+			
+			<div class="form-group mt-3">
+				<label asp-for="Image" class="control-label"></label>
+				<input type="file" asp-for="Image" class="form-control" />
+				<span asp-validation-for="Year" class="text-danger"></span>
+			</div>
+
+			<div class="form-group mt-3">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+<div class="row mt-3">
+	<div class="col">
+		<a class="btn btn-outline-secondary" asp-action="Index">Back</a>
+	</div>
+</div>
